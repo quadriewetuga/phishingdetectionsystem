@@ -1,0 +1,10 @@
+#Required Python packages
+streamlit
+pandas
+scikit-learn
+joblib
+pymongo
+dnspython
+streamlit-extras
+plotly
+python-whois
