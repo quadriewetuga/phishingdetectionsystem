@@ -29,7 +29,10 @@ if username_from_url and url_from_url and not st.session_state.logged_in:
     st.session_state.logged_in = True
     st.session_state.user = username_from_url
     st.session_state.page = "Detection Dashboard"
-    st.rerun()
+    try:
+        st.rerun()
+    except AttributeError:
+        st.experimental_rerun()
 
 # --- Sidebar navigation ---
 def render_sidebar():
@@ -43,14 +46,20 @@ def render_sidebar():
         for page in nav_options:
             if st.button(page, use_container_width=True, key=f"nav_{page}"):
                 st.session_state.page = page
-                st.rerun()
+                try:
+                    st.rerun()
+                except AttributeError:
+                    st.experimental_rerun()
 
         # Profile section stays below navigation
         with st.expander("👤 Profile Options"):
             st.markdown(f"Hey👋, **{st.session_state.user}**")
             if st.button("Logout", key="logout_btn", use_container_width=True):
                 st.session_state.clear()
-                st.rerun()
+                try:
+                    st.rerun()
+                except AttributeError:
+                    st.experimental_rerun()
 
 # --- App routing ---
 if st.session_state.logged_in:
