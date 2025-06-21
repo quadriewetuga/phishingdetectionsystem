@@ -5,7 +5,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
   if (changeInfo.status === "complete" && tab.url && tab.url.startsWith("http")) {
     const url = tab.url;
-    const username = "quadri";
+    const username = "eniola";
 
     console.log("📡 Sending URL to API:", url);
 

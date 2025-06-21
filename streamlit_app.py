@@ -19,6 +19,18 @@ if "page" not in st.session_state:
 if "user" not in st.session_state:
     st.session_state.user = "Guest"
 
+# --- Check for login via query params (from extension) ---
+query_params = st.experimental_get_query_params()
+username_from_url = query_params.get("username", [None])[0]
+url_from_url = query_params.get("url", [None])[0]
+
+# Auto-login if opened from browser extension and not already logged in
+if username_from_url and url_from_url and not st.session_state.logged_in:
+    st.session_state.logged_in = True
+    st.session_state.user = username_from_url
+    st.session_state.page = "Detection Dashboard"
+    st.rerun()
+
 # --- Sidebar navigation ---
 def render_sidebar():
     with st.sidebar:
